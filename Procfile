@@ -1,1 +1,1 @@
-web: python ffbeTest2.py
+web: python3 ffbeTest2.py
