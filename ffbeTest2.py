@@ -10,6 +10,7 @@ from bs4 import BeautifulSoup
 import requests
 import re
 import os
+PORT = int(os.environ.get('PORT', 5000))
 
 async def handle(msg):
     global chat_id
@@ -202,6 +203,12 @@ async def getUnitByRole(url):
 #else:
 #    port = 3000
 TOKEN = '1149079502:AAF693ne4U7omhzLC2ctx55H-pDcfByn-tA'
+# Start the Bot
+updater = Updater(TOKEN, use_context=True)
+updater.start_webhook(listen="0.0.0.0",
+                      port=int(PORT),
+                      url_path=TOKEN)
+updater.bot.setWebhook('https://yourherokuappname.herokuapp.com/' + TOKEN)
 bot = telepot.aio.Bot(TOKEN)
 loop = asyncio.get_event_loop()
 loop.create_task(MessageLoop(bot, handle).run_forever())
