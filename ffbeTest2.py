@@ -201,4 +201,4 @@ loop.create_task(MessageLoop(bot, handle).run_forever())
 print('Listening ...')
 
 # Keep the program running
-loop.run_forever()
+# loop.run_forever()
