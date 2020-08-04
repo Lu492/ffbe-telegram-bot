@@ -208,7 +208,7 @@ updater = Updater(TOKEN, use_context=True)
 updater.start_webhook(listen="0.0.0.0",
                       port=int(PORT),
                       url_path=TOKEN)
-updater.bot.setWebhook('https://yourherokuappname.herokuapp.com/' + TOKEN)
+updater.bot.setWebhook('https://ffbe-telebram-bot.herokuapp.com/' + TOKEN)
 bot = telepot.aio.Bot(TOKEN)
 loop = asyncio.get_event_loop()
 loop.create_task(MessageLoop(bot, handle).run_forever())
