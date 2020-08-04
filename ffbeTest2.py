@@ -9,6 +9,7 @@ from pprint import pprint
 from bs4 import BeautifulSoup
 import requests
 import re
+import os
 
 async def handle(msg):
     global chat_id
@@ -194,6 +195,12 @@ async def getUnitByRole(url):
         await bot.sendMessage(chat_id, 'Ahora mismo estoy ocupada...')
 
 # Program startup
+ON_HEROKU = os.environ.get('ON_HEROKU')
+if ON_HEROKU:
+    # get the heroku port 
+    port = int(os.environ.get("PORT", 17995))  # as per OP comments default is 17995
+else:
+    port = 3000
 TOKEN = '1149079502:AAF693ne4U7omhzLC2ctx55H-pDcfByn-tA'
 bot = telepot.aio.Bot(TOKEN)
 loop = asyncio.get_event_loop()
