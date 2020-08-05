@@ -10,7 +10,6 @@ from bs4 import BeautifulSoup
 import requests
 import re
 import os
-from flask import Flask, request
 
 async def handle(msg):
     global chat_id
@@ -196,19 +195,25 @@ async def getUnitByRole(url):
         await bot.sendMessage(chat_id, 'Ahora mismo estoy ocupada...')
 PORT = os.getenv("PORT")
 TOKEN = os.getenv("TOKEN")
+s = serial.Serial('/dev/pts/13', PORT)
+
+
+def test_serial():
+    text = ""
+    msg = s.read().decode()
+    while (msg != '\n'):
+        text += msg
+        msg = s.read().decode()
+    handle(text)
+    loop.call_soon(s.write, "ok\n".encode())
 # TOKEN = '1149079502:AAF693ne4U7omhzLC2ctx55H-pDcfByn-tA'
 bot = telepot.aio.Bot(TOKEN)
 loop = asyncio.get_event_loop()
-loop.create_task(MessageLoop(bot, handle).run_forever())
+loop.add_reader(s, test_serial)
+# loop.create_task(MessageLoop(bot, handle).run_forever())
 print('Listening ...')
 loop.run_forever()
-app = Flask(__name__)
 
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
-if __name__ == '__main__':
-    app.run(host='https://dashboard.heroku.com/apps/ffbe-telebram-bot',port=PORT)
 # Keep the program running
 
 
