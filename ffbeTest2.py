@@ -6,6 +6,7 @@ from pprint import pprint
 from bs4 import BeautifulSoup
 import requests
 import re
+import os
 
 async def handle(msg):
     global chat_id
