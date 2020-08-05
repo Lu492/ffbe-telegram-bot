@@ -208,7 +208,7 @@ app = Flask(__name__)
 def hello_world():
     return 'Hello, World!'
 if __name__ == '__main__':
-    app.run(PORT)
+    app.run(host='https://dashboard.heroku.com/apps/ffbe-telebram-bot',port=PORT)
 # Keep the program running
 
 
