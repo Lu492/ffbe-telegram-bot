@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 import asyncio
 import telepot
@@ -10,7 +8,22 @@ from bs4 import BeautifulSoup
 import requests
 import re
 import os
-from settings import TOKEN, WAIT_TIME, PORT, URL
+from http.server import BaseHTTPRequestHandler, HTTPServer
+import time
+
+hostName = "localhost"
+serverPort = 8080
+
+class MyServer(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header("Content-type", "text/html")
+        self.end_headers()
+        self.wfile.write(bytes("<html><head><title>https://pythonbasics.org</title></head>", "utf-8"))
+        self.wfile.write(bytes("<p>Request: %s</p>" % self.path, "utf-8"))
+        self.wfile.write(bytes("<body>", "utf-8"))
+        self.wfile.write(bytes("<p>This is an example web server.</p>", "utf-8"))
+        self.wfile.write(bytes("</body></html>", "utf-8"))
 
 async def handle(msg):
     global chat_id
@@ -194,14 +207,26 @@ async def getUnitByRole(url):
             await bot.sendMessage(chat_id, 'Iba a decirte algo pero se me olvidó...')
     except:
         await bot.sendMessage(chat_id, 'Ahora mismo estoy ocupada...')
-PORT = os.getenv("PORT")
-TOKEN = os.getenv("TOKEN")
-# TOKEN = '1149079502:AAF693ne4U7omhzLC2ctx55H-pDcfByn-tA'
-bot = telepot.aio.Bot(TOKEN)
-loop = asyncio.get_event_loop()
-loop.create_task(MessageLoop(bot, handle).run_forever())
-print('Listening ...')
 
-# Keep the program running
-loop.run_forever()
-app.run(port=PORT, debug=True)
+
+if __name__ == "__main__":        
+    webServer = HTTPServer((hostName, serverPort), MyServer)
+    print("Server started http://%s:%s" % (hostName, serverPort))
+
+    
+        
+    TOKEN = os.getenv("TOKEN")
+    # TOKEN = '1'
+    bot = telepot.aio.Bot(TOKEN)
+    loop = asyncio.get_event_loop()
+    loop.create_task(MessageLoop(bot, handle).run_forever())
+    print('Listening ...')
+
+    # Keep the program running
+    loop.run_forever()
+    try:
+        webServer.serve_forever()
+    except:
+        webServer.server_close()
+        print("Server stopped.")
+
