@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 import asyncio
 import telepot
 import telepot.aio
@@ -9,7 +6,6 @@ from pprint import pprint
 from bs4 import BeautifulSoup
 import requests
 import re
-import os
 
 async def handle(msg):
     global chat_id
@@ -31,13 +27,13 @@ async def handle(msg):
             else:
                 roleUrl = 'https://www.ffbesearch.com/Characters?FilteringByRoles=True&star7=True&AllRoles=False' + text.replace("/","&") + '=True'
                 await getUnitByRole(roleUrl)
-            
+
         else:
             await getMeaning(text.lower())
-            
+
         # https://www.ffbesearch.com/Characters?FilteringByRoles=True&star7=True&AllRoles=False&Breaker=False&Healer=False&MagicAttacker=False&MagicTank=False&PhysicalAttacker=True&PhysicalTank=False&Support=False&Versatile=False
         # https://www.ffbesearch.com/Characters?FilteringByRoles=True&star7=True&AllRoles=False&PhysicalAttacker=True
-            
+
 
 async def getMeaning(text):
     # create url
@@ -93,7 +89,7 @@ async def getMeaning(text):
                             else: rankMyUnit = 'No hay información del ranking..'
                         originalMyUnit = originalMyUnit.replace("\r","")
                         originalMyUnit = originalMyUnit.replace("\n","")
-                                
+
                         rankMyUnit = rankMyUnit.replace("\r"," ")
                         rankMyUnit = rankMyUnit.replace("\n"," ")
 
@@ -106,7 +102,7 @@ async def getMeaning(text):
                         rankMyUnit = rankMyUnit.strip()
 
                         info = alt + "\n" + originalMyUnit + "\n" + rankMyUnit
-                                
+
                                 # await bot.sendMessage(chat_id, rankMyUnit)
                         if resultNumber < 10:
                             await bot.sendPhoto(chat_id, lnk, caption = info)
@@ -114,7 +110,7 @@ async def getMeaning(text):
                         else:
                             await bot.sendMessage(chat_id, 'Hay más resultados pero estoy cansada...')
                             break
-                                
+
                     except:
                         await bot.sendMessage(chat_id, 'creo que no hay nada mas...')
             if resultNumber != 0:
@@ -163,7 +159,7 @@ async def getUnitByRole(url):
                         else: rankMyUnit = 'No hay información del ranking..'
                     originalMyUnit = originalMyUnit.replace("\r","")
                     originalMyUnit = originalMyUnit.replace("\n","")
-                            
+
                     rankMyUnit = rankMyUnit.replace("\r"," ")
                     rankMyUnit = rankMyUnit.replace("\n"," ")
 
@@ -182,7 +178,7 @@ async def getUnitByRole(url):
                     else:
                         await bot.sendMessage(chat_id, 'Hay más resultados pero estoy cansada...')
                         break
-                            
+
                 except:
                     await bot.sendMessage(chat_id, 'creo que no hay nada mas...')
             if resultNumber != 0:
@@ -193,9 +189,9 @@ async def getUnitByRole(url):
             await bot.sendMessage(chat_id, 'Iba a decirte algo pero se me olvidó...')
     except:
         await bot.sendMessage(chat_id, 'Ahora mismo estoy ocupada...')
-PORT = os.getenv("PORT")
+
+# Program startup
 TOKEN = os.getenv("TOKEN")
-# TOKEN = '1149079502:AAF693ne4U7omhzLC2ctx55H-pDcfByn-tA'
 bot = telepot.aio.Bot(TOKEN)
 loop = asyncio.get_event_loop()
 loop.create_task(MessageLoop(bot, handle).run_forever())
