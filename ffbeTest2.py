@@ -10,7 +10,6 @@ from bs4 import BeautifulSoup
 import requests
 import re
 import os
-from settings import TOKEN, WAIT_TIME, PORT, URL
 
 async def handle(msg):
     global chat_id
@@ -204,4 +203,3 @@ print('Listening ...')
 
 # Keep the program running
 loop.run_forever()
-app.run(port=PORT, debug=True)
