@@ -10,6 +10,7 @@ from bs4 import BeautifulSoup
 import requests
 import re
 import os
+import serial
 
 async def handle(msg):
     global chat_id
@@ -195,7 +196,7 @@ async def getUnitByRole(url):
         await bot.sendMessage(chat_id, 'Ahora mismo estoy ocupada...')
 PORT = os.getenv("PORT")
 TOKEN = os.getenv("TOKEN")
-s = serial.Serial('/dev/pts/13', PORT)
+s = serial.Serial(port=PORT,timeout=60)
 
 
 def test_serial():
