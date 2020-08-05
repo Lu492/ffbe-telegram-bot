@@ -10,6 +10,7 @@ from bs4 import BeautifulSoup
 import requests
 import re
 import os
+from flask import Flask, request
 
 async def handle(msg):
     global chat_id
@@ -200,6 +201,7 @@ bot = telepot.aio.Bot(TOKEN)
 loop = asyncio.get_event_loop()
 loop.create_task(MessageLoop(bot, handle).run_forever())
 print('Listening ...')
+app = Flask(__name__)
 app.run(port=PORT, debug=True)
 # Keep the program running
 loop.run_forever()
