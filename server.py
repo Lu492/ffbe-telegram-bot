@@ -11,7 +11,7 @@ import os
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import time
 
-hostName = "https://ffbe-telebram-bot.herokuapp.com"
+hostName = 'https://ffbe-telebram-bot.herokuapp.com'
 # hostName = "localhost"
 serverPort = int(os.getenv("PORT"))
 # serverPort = 8080
