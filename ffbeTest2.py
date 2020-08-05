@@ -201,6 +201,7 @@ bot = telepot.aio.Bot(TOKEN)
 loop = asyncio.get_event_loop()
 loop.create_task(MessageLoop(bot, handle).run_forever())
 print('Listening ...')
+loop.run_forever()
 app = Flask(__name__)
 
 @app.route('/')
@@ -209,5 +210,5 @@ def hello_world():
 if __name__ == '__main__':
     app.run()
 # Keep the program running
-loop.run_forever()
+
 
