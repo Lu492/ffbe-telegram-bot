@@ -13,7 +13,7 @@ import time
 
 hostName = "https://ffbe-telebram-bot.herokuapp.com"
 # hostName = "localhost"
-serverPort = os.getenv("PORT")
+serverPort = int(os.getenv("PORT"))
 # serverPort = 8080
 
 class MyServer(BaseHTTPRequestHandler):
