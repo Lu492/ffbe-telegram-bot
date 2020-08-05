@@ -13,19 +13,22 @@ import time
 
 # hostName = 'https://ffbe-telebram-bot.herokuapp.com'
 hostName = "localhost"
-serverPort = int(os.getenv("PORT"))
-# serverPort = 8080
+# serverPort = int(os.getenv("PORT"))
+serverPort = 8080
 
 class MyServer(BaseHTTPRequestHandler):
     def do_GET(self):
         self.send_response(200)
-        self.send_header("Content-type", "text/html")
-        self.end_headers()
-        self.wfile.write(bytes("<html><head><title>https://pythonbasics.org</title></head>", "utf-8"))
-        self.wfile.write(bytes("<p>Request: %s</p>" % self.path, "utf-8"))
-        self.wfile.write(bytes("<body>", "utf-8"))
-        self.wfile.write(bytes("<p>This is an example web server.</p>", "utf-8"))
-        self.wfile.write(bytes("</body></html>", "utf-8"))
+##        self.send_header("Content-type", "text/html")
+##        self.end_headers()
+##        self.flush_headers()
+##        self.wfile.write("<html><head><title>Title goes here.</title></head></html>".encode("utf-8"))
+##        self.wfile.write(bytes("<html><head><title>https://pythonbasics.org</title></head>", "utf-8"))
+##        self.wfile.write(bytes("<p>Request: %s</p>" % self.path, "utf-8"))
+##        self.wfile.write(bytes("<body>", "utf-8"))
+##        self.wfile.write(bytes("<p>This is an example web server.</p>", "utf-8"))
+##        self.wfile.write(bytes("</body></html>", "utf-8"))
+##        self.wfile.close()
 
 async def handle(msg):
     global chat_id
@@ -218,7 +221,7 @@ if __name__ == "__main__":
     
         
     TOKEN = os.getenv("TOKEN")
-    # TOKEN = '1'
+    TOKEN = '1149079502:AAGxahhsQ8xO8mqZYrFrbFF4qR9n8C0RyQg'
     bot = telepot.aio.Bot(TOKEN)
     loop = asyncio.get_event_loop()
     loop.create_task(MessageLoop(bot, handle).run_forever())
