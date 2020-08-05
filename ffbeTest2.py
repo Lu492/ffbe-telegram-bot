@@ -202,7 +202,12 @@ loop = asyncio.get_event_loop()
 loop.create_task(MessageLoop(bot, handle).run_forever())
 print('Listening ...')
 app = Flask(__name__)
-app.run(port=PORT, debug=True)
+
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
+if __name__ == '__main__':
+    app.run()
 # Keep the program running
 loop.run_forever()
 
