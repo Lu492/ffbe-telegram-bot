@@ -11,8 +11,10 @@ import os
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import time
 
-hostName = "localhost"
-serverPort = 8080
+hostName = "https://ffbe-telebram-bot.herokuapp.com"
+# hostName = "localhost"
+serverPort = os.getenv("PORT")
+# serverPort = 8080
 
 class MyServer(BaseHTTPRequestHandler):
     def do_GET(self):
