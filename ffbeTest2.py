@@ -11,6 +11,7 @@ import requests
 import re
 import os
 import serial
+from serial import Serial
 
 async def handle(msg):
     global chat_id
