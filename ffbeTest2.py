@@ -211,7 +211,10 @@ def test_serial():
 # TOKEN = '1149079502:AAF693ne4U7omhzLC2ctx55H-pDcfByn-tA'
 bot = telepot.aio.Bot(TOKEN)
 loop = asyncio.get_event_loop()
-loop.add_reader(s, test_serial)
+try:
+    loop.add_reader(s, test_serial)
+except:
+    print('no se enciende el lector')
 # loop.create_task(MessageLoop(bot, handle).run_forever())
 print('Listening ...')
 loop.run_forever()
