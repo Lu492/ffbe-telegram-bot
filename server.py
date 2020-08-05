@@ -13,8 +13,8 @@ import time
 
 # hostName = 'https://ffbe-telebram-bot.herokuapp.com'
 hostName = "localhost"
-# serverPort = int(os.getenv("PORT"))
-serverPort = 8080
+serverPort = int(os.getenv("PORT"))
+# serverPort = 8080
 
 class MyServer(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -221,7 +221,7 @@ if __name__ == "__main__":
     
         
     TOKEN = os.getenv("TOKEN")
-    TOKEN = '1149079502:AAGxahhsQ8xO8mqZYrFrbFF4qR9n8C0RyQg'
+    #TOKEN = '*******'
     bot = telepot.aio.Bot(TOKEN)
     loop = asyncio.get_event_loop()
     loop.create_task(MessageLoop(bot, handle).run_forever())
