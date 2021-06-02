@@ -21,6 +21,6 @@ serial==0.0.97
 soupsieve==2.0.1
 telegram==0.0.1
 telepot==12.7
-urllib3==1.25.10
+urllib3==1.26.5
 Werkzeug==1.0.1
 yarl==1.5.1
